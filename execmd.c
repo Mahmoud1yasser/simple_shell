@@ -41,7 +41,7 @@ void execmd(char **argv)
 		else if (child_pid == 0)
 		{
 			if (execve(actual_command, argv, NULL) == -1)
-				perror("Error:"); }
+				perror("Error:");
 			exit(1);
 		}
 		else
