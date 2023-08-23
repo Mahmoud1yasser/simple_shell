@@ -1,12 +1,15 @@
 #include "shell.h"
 
 /**
- * is_cmd - determines if a file is an executable command
- * @info: the info struct
- * @path: path to the file
+ * is_cmd - Entery point
  *
- * Return: 1 if true, 0 otherwise
- */
+ * @info: the info struct
+ *
+ * @path: Character
+ *
+ * Return: 1 if true, 0 fail
+*/
+
 int is_cmd(info_t *info, char *path)
 {
 	struct stat st;
@@ -23,36 +26,44 @@ int is_cmd(info_t *info, char *path)
 }
 
 /**
- * dup_chars - duplicates characters
- * @pathstr: the PATH string
- * @start: starting index
- * @stop: stopping index
+ * dup_chars - Entery point
+ *
+ * @pathstr: Charater
+ *
+ * @start: integer
+ *
+ * @stop: integer
  *
  * Return: pointer to new buffer
- */
+*/
+
 char *dup_chars(char *pathstr, int start, int stop)
 {
 	static char buf[1024];
-	int i = 0, k = 0;
+	int j = 0, k = 0;
 
-	for (k = 0, i = start; i < stop; i++)
-		if (pathstr[i] != ':')
-			buf[k++] = pathstr[i];
+	for (k = 0, j = start; j < stop; j++)
+		if (pathstr[j] != ':')
+			buf[k++] = pathstr[j];
 	buf[k] = 0;
 	return (buf);
 }
 
 /**
- * find_path - finds this cmd in the PATH string
+ * find_path - Entery point
+ *
  * @info: the info struct
- * @pathstr: the PATH string
- * @cmd: the cmd to find
+ *
+ * @pathstr: Charater
+ *
+ * @cmd: the cmd to find charater
  *
  * Return: full path of cmd if found or NULL
- */
+*/
+
 char *find_path(info_t *info, char *pathstr, char *cmd)
 {
-	int i = 0, curr_pos = 0;
+	int j = 0, curr_pos = 0;
 	char *path;
 
 	if (!pathstr)
@@ -64,9 +75,9 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 	}
 	while (1)
 	{
-		if (!pathstr[i] || pathstr[i] == ':')
+		if (!pathstr[j] || pathstr[j] == ':')
 		{
-			path = dup_chars(pathstr, curr_pos, i);
+			path = dup_chars(pathstr, curr_pos, j);
 			if (!*path)
 				_strcat(path, cmd);
 			else
@@ -76,11 +87,11 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 			}
 			if (is_cmd(info, path))
 				return (path);
-			if (!pathstr[i])
+			if (!pathstr[j])
 				break;
-			curr_pos = i;
+			curr_pos = j;
 		}
-		i++;
+		j++;
 	}
 	return (NULL);
 }
