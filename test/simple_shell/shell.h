@@ -44,9 +44,9 @@ void array_rev(char *arr, int len);
 int intlen(int num);
 char *_itoa(unsigned int n);
 char *_strcat(char *dest, char *src);
-char *_strcpy(char *dest, char *src);
+char *Str_cpy(char *dest, char *src);
 char *_strchr(char *s, char c);
-int _strncmp(const char *s1, const char *s2, size_t n);
+int str_cmp(const char *s1, const char *s2, size_t n);
 char *_strdup(char *str);
 
 /**###### MEMORIE  MANGMENT ####*/
@@ -62,13 +62,13 @@ void free_all(char **input, char *line);
 
 void prompt(void);
 void signal_to_handel(int sig);
-char *_getline(void);
+char *get_lin(void);
 
 /** ###### Command parser and extractor ###*/
 
 int path_cmd(char **line);
 char *_getenv(char *name);
-char **parse_cmd(char *cmd);
+char **brek_comm(char *cmd);
 int handle_builtin(char **cmd, int er);
 void read_file(char *filename, char **argv);
 char *build(char *token, char *value);
@@ -82,9 +82,9 @@ void exit_bul_for_file(char **cmd, char *line, FILE *fd);
 
 void hashtag_handle(char *buff);
 int history(char *input);
-int history_dis(char **cmd, int er);
-int dis_env(char **cmd, int er);
-int change_dir(char **cmd, int er);
+int hist_destination(char **cmd, int er);
+int dist_enviroment(char **cmd, int er);
+int ch_directory(char **cmd, int er);
 int display_help(char **cmd, int er);
 int echo_bul(char **cmd, int er);
 void  exit_bul(char **cmd, char *input, char **argv, int c);

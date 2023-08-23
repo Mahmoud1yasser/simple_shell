@@ -36,12 +36,12 @@ void  exit_bul(char **cmd, char *input, char **argv, int c)
 
 
 /**
- * change_dir - Change Dirctorie
+ * ch_directory - Change Dirctorie
  * @cmd: Parsed Command
  * @er: Statue Last Command Excuted
  * Return: 0 Succes 1 Failed (For Old Pwd Always 0 Case No Old PWD)
  */
-int change_dir(char **cmd, __attribute__((unused))int er)
+int ch_directory(char **cmd, __attribute__((unused))int er)
 {
 	int value = -1;
 	char cwd[PATH_MAX];
@@ -69,12 +69,12 @@ int change_dir(char **cmd, __attribute__((unused))int er)
 	return (0);
 }
 /**
- * dis_env - Display Enviroment Variable
+ * dist_enviroment - Display Enviroment Variable
  * @cmd:Parsed Command
  * @er:Statue of Last command Excuted
  * Return:Always 0
  */
-int dis_env(__attribute__((unused)) char **cmd, __attribute__((unused)) int er)
+int dist_enviroment(__attribute__((unused)) char **cmd, __attribute__((unused)) int er)
 {
 size_t i;
 	int len;
@@ -127,18 +127,18 @@ int echo_bul(char **cmd, int st)
 	char *path;
 	unsigned int  pid = getppid();
 
-	if (_strncmp(cmd[1], "$?", 2) == 0)
+	if (str_cmp(cmd[1], "$?", 2) == 0)
 	{
 		print_number_in(st);
 		PRINTER("\n");
 	}
-	else if (_strncmp(cmd[1], "$$", 2) == 0)
+	else if (str_cmp(cmd[1], "$$", 2) == 0)
 	{
 		print_number(pid);
 		PRINTER("\n");
 
 	}
-	else if (_strncmp(cmd[1], "$PATH", 5) == 0)
+	else if (str_cmp(cmd[1], "$PATH", 5) == 0)
 	{
 		path = _getenv("PATH");
 		PRINTER(path);

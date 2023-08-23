@@ -42,9 +42,9 @@ void treat_file(char *line, int counter, FILE *fp, char **argv)
 	char **cmd;
 	int st = 0;
 
-	cmd = parse_cmd(line);
+	cmd = brek_comm(line);
 
-		if (_strncmp(cmd[0], "exit", 4) == 0)
+		if (str_cmp(cmd[0], "exit", 4) == 0)
 		{
 			exit_bul_for_file(cmd, line, fp);
 		}

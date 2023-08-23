@@ -20,13 +20,13 @@ int main(__attribute__((unused)) int argc, char **argv)
 		counter++;
 		if (isatty(STDIN_FILENO))
 			prompt();
-		input = _getline();
+		input = get_lin();
 		if (input[0] == '\0')
 		{
 			continue;
 		}
 		history(input);
-		cmd = parse_cmd(input);
+		cmd = brek_comm(input);
 		if (_strcmp(cmd[0], "exit") == 0)
 		{
 			exit_bul(cmd, input, argv, counter);

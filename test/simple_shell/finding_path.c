@@ -70,7 +70,7 @@ char *_getenv(char *name)
 	nl = _strlen(name);
 	for (i = 0 ; environ[i]; i++)
 	{
-		if (_strncmp(name, environ[i], nl) == 0)
+		if (str_cmp(name, environ[i], nl) == 0)
 		{
 			vl = _strlen(environ[i]) - nl;
 			value = malloc(sizeof(char) * vl);

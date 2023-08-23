@@ -1,11 +1,11 @@
 #include "shell.h"
 /**
- * _strcpy - Copie Source To Destination Char
+ * Str_cpy - Copie Source To Destination Char
  * @dest:Destination
  * @src:Source
  * Return: Copie Of Char *
  */
-char *_strcpy(char *dest, char *src)
+char *Str_cpy(char *dest, char *src)
 {
 int i;
 
@@ -62,14 +62,14 @@ char *_strchr(char *s, char c)
 return (s);
 }
 /**
- * _strncmp - Compare Amount (n) Of Characters Of Two Strings.
+ * str_cmp - Compare Amount (n) Of Characters Of Two Strings.
  * @s1: A String.
  * @s2: A String.
  * @n: Amount Of Characters To Compare.
  *
  * Return: 1 If The Strings Don't Match Otherwise 0
  */
-int _strncmp(const char *s1, const char *s2, size_t n)
+int str_cmp(const char *s1, const char *s2, size_t n)
 {
 	size_t i;
 

@@ -10,11 +10,11 @@
 int handle_builtin(char **cmd, int er)
 {
 	 bul_t bil[] = {
-		{"cd", change_dir},
-		{"env", dis_env},
+		{"cd", ch_directory},
+		{"env", dist_enviroment},
 		{"help", display_help},
 		{"echo", echo_bul},
-		{"history", history_dis},
+		{"history", hist_destination},
 		{NULL, NULL}
 	};
 	int i = 0;
@@ -57,7 +57,7 @@ int check_cmd(char **cmd, char *input, int c, char **argv)
 
 	if (pid == 0)
 	{
-		if (_strncmp(*cmd, "./", 2) != 0 && _strncmp(*cmd, "/", 1) != 0)
+		if (str_cmp(*cmd, "./", 2) != 0 && str_cmp(*cmd, "/", 1) != 0)
 		{
 			path_cmd(cmd);
 		}
