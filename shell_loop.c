@@ -45,12 +45,10 @@ int hsh(strctos_t *strctos, char **av)
 
 /**
  * find_builtin - finds a builtin command
+ *
  * @strctos: the parameter & return strctos struct
  *
- * Return: -1 if builtin not found,
- * 	0 if builtin executed successfully,
- * 	1 if builtin found but not successful,
- * 	2 if builtin signals exit()
+ * Return: -1 if builtin
  */
 int find_builtin(strctos_t *strctos)
 {
@@ -79,6 +77,7 @@ int find_builtin(strctos_t *strctos)
 
 /**
  * find_cmd - finds a command in PATH
+ *
  * @strctos: the parameter & return strctos struct
  *
  * Return: void
