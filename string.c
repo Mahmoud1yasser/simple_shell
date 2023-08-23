@@ -1,30 +1,35 @@
 #include "shell.h"
 
 /**
- * _strlen - returns the length of a string
- * @s: the string whose length to check
+ * _strlen - Entery point
+ *
+ * @s: string of char
  *
  * Return: integer length of string
- */
+*/
+
 int _strlen(char *s)
 {
-	int i = 0;
+	int k = 0;
 
 	if (!s)
 		return (0);
 
 	while (*s++)
-		i++;
-	return (i);
+		k++;
+	return (k);
 }
 
 /**
- * _strcmp - performs lexicogarphic comparison of two strangs.
- * @s1: the first strang
- * @s2: the second strang
+ * _strcmp - Entery point
  *
- * Return: negative if s1 < s2, positive if s1 > s2, zero if s1 == s2
+ * @s1: character
+ *
+ * @s2: the second strang char
+ *
+ * Return: integrer number
  */
+
 int _strcmp(char *s1, char *s2)
 {
 	while (*s1 && *s2)
@@ -41,12 +46,15 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
- * starts_with - checks if needle starts with haystack
- * @haystack: string to search
- * @needle: the substring to find
+ * starts_with - Entery ponit
  *
- * Return: address of next char of haystack or NULL
- */
+ * @haystack: const character
+ *
+ * @needle: const character
+ *
+ * Return: address of next char
+*/
+
 char *starts_with(const char *haystack, const char *needle)
 {
 	while (*needle)
@@ -56,20 +64,23 @@ char *starts_with(const char *haystack, const char *needle)
 }
 
 /**
- * _strcat - concatenates two strings
- * @dest: the destination buffer
- * @src: the source buffer
+ * _strcat - Entery point
  *
- * Return: pointer to destination buffer
- */
+ * @dest: character
+ *
+ * @src: the source buffer char
+ *
+ * Return: pointer to dest of type char
+*/
+
 char *_strcat(char *dest, char *src)
 {
-	char *ret = dest;
+	char *re = dest;
 
 	while (*dest)
 		dest++;
 	while (*src)
 		*dest++ = *src++;
 	*dest = *src;
-	return (ret);
+	return (re);
 }
