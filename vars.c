@@ -45,7 +45,8 @@ int is_chain(strctos_t *strctos, char *buf, size_t *p)
  *
  * Return: Void
  */
-void check_chain(strctos_t *strctos, char *buf, size_t *p, size_t i, size_t len)
+void check_chain(strctos_t *strctos, char *buf,
+		size_t *p, size_t i, size_t len)
 {
 	size_t j = *p;
 
