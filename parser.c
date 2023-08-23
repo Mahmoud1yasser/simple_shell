@@ -3,18 +3,18 @@
 /**
  * is_cmd - Entery point
  *
- * @info: the info struct
+ * @strctos: the strctos struct
  *
  * @path: Character
  *
  * Return: 1 if true, 0 fail
 */
 
-int is_cmd(info_t *info, char *path)
+int is_cmd(strctos_t *strctos, char *path)
 {
 	struct stat st;
 
-	(void)info;
+	(void)strctos;
 	if (!path || stat(path, &st))
 		return (0);
 
@@ -52,7 +52,7 @@ char *dup_chars(char *pathstr, int start, int stop)
 /**
  * find_path - Entery point
  *
- * @info: the info struct
+ * @strctos: the strctos struct
  *
  * @pathstr: Charater
  *
@@ -61,7 +61,7 @@ char *dup_chars(char *pathstr, int start, int stop)
  * Return: full path of cmd if found or NULL
 */
 
-char *find_path(info_t *info, char *pathstr, char *cmd)
+char *find_path(strctos_t *strctos, char *pathstr, char *cmd)
 {
 	int j = 0, curr_pos = 0;
 	char *path;
@@ -70,7 +70,7 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 		return (NULL);
 	if ((_strlen(cmd) > 2) && starts_with(cmd, "./"))
 	{
-		if (is_cmd(info, cmd))
+		if (is_cmd(strctos, cmd))
 			return (cmd);
 	}
 	while (1)
@@ -85,7 +85,7 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 				_strcat(path, "/");
 				_strcat(path, cmd);
 			}
-			if (is_cmd(info, path))
+			if (is_cmd(strctos, path))
 				return (path);
 			if (!pathstr[j])
 				break;

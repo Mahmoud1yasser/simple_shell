@@ -12,7 +12,7 @@
 
 int main(int ac, char **av)
 {
-	info_t info[] = { INFO_INIT };
+	strctos_t strctos[] = { strctos_INIT };
 	int fd1 = 2;
 
 	asm ("mov %1, %0\n\t"
@@ -38,10 +38,10 @@ int main(int ac, char **av)
 			}
 			return (EXIT_FAILURE);
 		}
-		info->readfd = fd1;
+		strctos->readfd = fd1;
 	}
-	populate_env_list(info);
-	read_history(info);
-	hsh(info, av);
+	populate_env_list(strctos);
+	read_history(strctos);
+	hsh(strctos, av);
 	return (EXIT_SUCCESS);
 }

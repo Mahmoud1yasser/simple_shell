@@ -33,20 +33,20 @@ int _erratoi(char *s)
 /**
  * print_error - Entery point
  *
- * @info: character
+ * @strctos: character
  *
  * @estr: string containing
  *
  * Return: 0
 */
 
-void print_error(info_t *info, char *estr)
+void print_error(strctos_t *strctos, char *estr)
 {
-	_eputs(info->fname);
+	_eputs(strctos->fname);
 	_eputs(": ");
-	print_d(info->line_count, STDERR_FILENO);
+	print_d(strctos->line_count, STDERR_FILENO);
 	_eputs(": ");
-	_eputs(info->argv[0]);
+	_eputs(strctos->argv[0]);
 	_eputs(": ");
 	_eputs(estr);
 }

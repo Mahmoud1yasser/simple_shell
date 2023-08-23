@@ -1,86 +1,86 @@
 #include "shell.h"
 
 /**
- * clear_info - Entery point
+ * clear_strctos - Entery point
  *
- * @info: struct address
+ * @strctos: struct address
  *
  * Retrun: 0 if success
  */
-void clear_info(info_t *info)
+void clear_strctos(strctos_t *strctos)
 {
-	info->arg = NULL;
-	info->argv = NULL;
-	info->path = NULL;
-	info->argc = 0;
+	strctos->arg = NULL;
+	strctos->argv = NULL;
+	strctos->path = NULL;
+	strctos->argc = 0;
 }
 
 /**
- * set_info - Entery point
+ * set_strctos - Entery point
  *
- * @info: strct pointer
+ * @strctos: strct pointer
  *
  * @av: argument vector
  *
  * Return: 0 if success
 */
 
-void set_info(info_t *info, char **av)
+void set_strctos(strctos_t *strctos, char **av)
 {
 	int k = 0;
 
-	info->fname = av[0];
-	if (info->arg)
+	strctos->fname = av[0];
+	if (strctos->arg)
 	{
-		info->argv = strtow(info->arg, " \t");
-		if (!info->argv)
+		strctos->argv = strtow(strctos->arg, " \t");
+		if (!strctos->argv)
 		{
-			info->argv = malloc(sizeof(char *) * 2);
-			if (info->argv)
+			strctos->argv = malloc(sizeof(char *) * 2);
+			if (strctos->argv)
 			{
-				info->argv[0] = _strdup(info->arg);
-				info->argv[1] = NULL;
+				strctos->argv[0] = _strdup(strctos->arg);
+				strctos->argv[1] = NULL;
 			}
 		}
-		for (k = 0; info->argv && info->argv[k]; k++)
+		for (k = 0; strctos->argv && strctos->argv[k]; k++)
 			;
-		info->argc = k;
+		strctos->argc = k;
 
-		replace_alias(info);
-		replace_vars(info);
+		replace_alias(strctos);
+		replace_vars(strctos);
 	}
 }
 
 /**
- * free_info - Entery point
+ * free_strctos - Entery point
  *
- * @info: struct address pointer
+ * @strctos: struct address pointer
  *
  * @all: integer
  *
  * Return: 0 if success
 */
 
-void free_info(info_t *info, int all)
+void free_strctos(strctos_t *strctos, int all)
 {
-	ffree(info->argv);
-	info->argv = NULL;
-	info->path = NULL;
+	ffree(strctos->argv);
+	strctos->argv = NULL;
+	strctos->path = NULL;
 	if (all)
 	{
-		if (!info->cmd_buf)
-			free(info->arg);
-		if (info->env)
-			free_list(&(info->env));
-		if (info->history)
-			free_list(&(info->history));
-		if (info->alias)
-			free_list(&(info->alias));
-		ffree(info->environ);
-			info->environ = NULL;
-		bfree((void **)info->cmd_buf);
-		if (info->readfd > 2)
-			close(info->readfd);
+		if (!strctos->cmd_buf)
+			free(strctos->arg);
+		if (strctos->env)
+			free_list(&(strctos->env));
+		if (strctos->history)
+			free_list(&(strctos->history));
+		if (strctos->alias)
+			free_list(&(strctos->alias));
+		ffree(strctos->environ);
+			strctos->environ = NULL;
+		bfree((void **)strctos->cmd_buf);
+		if (strctos->readfd > 2)
+			close(strctos->readfd);
 		_putchar(BUF_FLUSH);
 	}
 }

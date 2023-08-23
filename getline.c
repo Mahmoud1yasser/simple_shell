@@ -2,27 +2,27 @@
 
 /**
  * input_buf - buffers command
- * @info: structure
+ * @strctos: structure
  * @buf: buffer addr
  * @len: buffr lenght
  *
  * Return: bytes read
  */
-ssize_t input_buf(info_t *info, char **buf, size_t *len)
+ssize_t input_buf(strctos_t *strctos, char **buf, size_t *len)
 {
 	ssize_t r = 0;
 	size_t len_p = 0;
 
 	if (!*len) /* if nothing left in the buffer, fill it */
 	{
-		/*bfree((void **)info->cmd_buf);*/
+		/*bfree((void **)strctos->cmd_buf);*/
 		free(*buf);
 		*buf = NULL;
 		signal(SIGINT, sigintHandler);
 #if USE_GETLINE
 		r = getline(buf, &len_p, stdin);
 #else
-		r = _getline(info, buf, &len_p);
+		r = _getline(strctos, buf, &len_p);
 #endif
 		if (r > 0)
 		{
@@ -31,12 +31,12 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 				(*buf)[r - 1] = '\0';
 				r--;
 			}
-			info->linecount_flag = 1;
+			strctos->linecount_flag = 1;
 			remove_comments(*buf);
-			build_history_list(info, *buf, info->histcount++);
+			build_history_list(strctos, *buf, strctos->histcount++);
 			{
 				*len = r;
-				info->cmd_buf = buf;
+				strctos->cmd_buf = buf;
 			}
 		}
 	}
@@ -45,19 +45,19 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 
 /**
  * get_input - get line exclude new
- * @info: structure
+ * @strctos: structure
  *
  * Return: bytes readen
  */
-ssize_t get_input(info_t *info)
+ssize_t get_input(strctos_t *strctos)
 {
 	static char *buf;
 	static size_t i, j, len;
 	ssize_t r = 0;
-	char **buf_p = &(info->arg), *p;
+	char **buf_p = &(strctos->arg), *p;
 
 	_putchar(BUF_FLUSH);
-	r = input_buf(info, &buf, &len);
+	r = input_buf(strctos, &buf, &len);
 	if (r == -1)
 		return (-1);
 	if (len)
@@ -65,10 +65,10 @@ ssize_t get_input(info_t *info)
 		j = i;
 		p = buf + i;
 
-		check_chain(info, buf, &j, i, len);
+		check_chain(strctos, buf, &j, i, len);
 		while (j < len)
 		{
-			if (is_chain(info, buf, &j))
+			if (is_chain(strctos, buf, &j))
 				break;
 			j++;
 		}
@@ -77,7 +77,7 @@ ssize_t get_input(info_t *info)
 		if (i >= len)
 		{
 			i = len = 0;
-			info->cmd_buf_type = CMD_NORM;
+			strctos->cmd_buf_type = CMD_NORM;
 		}
 
 		*buf_p = p;
@@ -90,18 +90,18 @@ ssize_t get_input(info_t *info)
 
 /**
  * read_buf - read buff
- * @info: structure
+ * @strctos: structure
  * @buf: constructed buffer
  * @i: size
  * Return: r
  */
-ssize_t read_buf(info_t *info, char *buf, size_t *i)
+ssize_t read_buf(strctos_t *strctos, char *buf, size_t *i)
 {
 	ssize_t r = 0;
 
 	if (*i)
 		return (0);
-	r = read(info->readfd, buf, READ_BUF_SIZE);
+	r = read(strctos->readfd, buf, READ_BUF_SIZE);
 	if (r >= 0)
 		*i = r;
 	return (r);
@@ -109,12 +109,12 @@ ssize_t read_buf(info_t *info, char *buf, size_t *i)
 
 /**
  * _getline - get nextline from STDIN
- * @info: structure
+ * @strctos: structure
  * @ptr: pointer to buffer
  * @length: lenght of buffer
  * Return: s
  */
-int _getline(info_t *info, char **ptr, size_t *length)
+int _getline(strctos_t *strctos, char **ptr, size_t *length)
 {
 	static char buf[READ_BUF_SIZE];
 	static size_t i, len;
@@ -128,7 +128,7 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	if (i == len)
 		i = len = 0;
 
-	r = read_buf(info, buf, &len);
+	r = read_buf(strctos, buf, &len);
 	if (r == -1 || (r == 0 && len == 0))
 		return (-1);
 

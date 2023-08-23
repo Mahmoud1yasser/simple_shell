@@ -3,14 +3,14 @@
 /**
  * interactive - Entery point
  *
- * @info: structure address pointer
+ * @strctos: structure address pointer
  *
  * Return: 1 if interactive mode, 0 otherwise
 */
 
-int interactive(info_t *info)
+int interactive(strctos_t *strctos)
 {
-	return (isatty(STDIN_FILENO) && info->readfd <= 2);
+	return (isatty(STDIN_FILENO) && strctos->readfd <= 2);
 }
 
 /**

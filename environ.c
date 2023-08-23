@@ -2,25 +2,25 @@
 
 /**
  * _myenv - print current enviro
- * @info: structure of arguments.
+ * @strctos: structure of arguments.
  * Return: Always 0
  */
-int _myenv(info_t *info)
+int _myenv(strctos_t *strctos)
 {
-	print_list_str(info->env);
+	print_list_str(strctos->env);
 	return (0);
 }
 
 /**
  * _getenv - get value of environ variable
- * @info: structure of arguments
+ * @strctos: structure of arguments
  * @name: env var name
  *
  * Return: the value
  */
-char *_getenv(info_t *info, const char *name)
+char *_getenv(strctos_t *strctos, const char *name)
 {
-	list_t *node = info->env;
+	list_t *node = strctos->env;
 	char *p;
 
 	while (node)
@@ -35,53 +35,53 @@ char *_getenv(info_t *info, const char *name)
 
 /**
  * _mysetenv - new inviron modify existing one
- * @info: structure of arguments
+ * @strctos: structure of arguments
  *  Return: Always 0
  */
-int _mysetenv(info_t *info)
+int _mysetenv(strctos_t *strctos)
 {
-	if (info->argc != 3)
+	if (strctos->argc != 3)
 	{
 		_eputs("Incorrect number of arguements\n");
 		return (1);
 	}
-	if (_setenv(info, info->argv[1], info->argv[2]))
+	if (_setenv(strctos, strctos->argv[1], strctos->argv[2]))
 		return (0);
 	return (1);
 }
 
 /**
  * _myunsetenv - remove environ variable
- * @info: structure of arguments.
+ * @strctos: structure of arguments.
  * Return: Always 0
  */
-int _myunsetenv(info_t *info)
+int _myunsetenv(strctos_t *strctos)
 {
 	int i;
 
-	if (info->argc == 1)
+	if (strctos->argc == 1)
 	{
 		_eputs("Too few arguements.\n");
 		return (1);
 	}
-	for (i = 1; i <= info->argc; i++)
-		_unsetenv(info, info->argv[i]);
+	for (i = 1; i <= strctos->argc; i++)
+		_unsetenv(strctos, strctos->argv[i]);
 
 	return (0);
 }
 
 /**
  * populate_env_list - populates env linked list
- * @info: structure of arguments.
+ * @strctos: structure of arguments.
  * Return: Always 0
  */
-int populate_env_list(info_t *info)
+int populate_env_list(strctos_t *strctos)
 {
 	list_t *node = NULL;
 	size_t i;
 
 	for (i = 0; environ[i]; i++)
 		add_node_end(&node, environ[i], 0);
-	info->env = node;
+	strctos->env = node;
 	return (0);
 }
